@@ -1,2 +1,2 @@
-# PointAndShoot
+# GoldenHour
 PhotoScavengerHunt
