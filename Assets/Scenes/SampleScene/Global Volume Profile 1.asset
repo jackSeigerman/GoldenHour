@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-2361446726044484269
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdaaa7489cdb84f4b9389e3a3e61a780, type: 3}
+  m_Name: SkyAndClouds
+  m_EditorClassIdentifier: 
+  active: 1
+  <displayName>k__BackingField: 
+  enabled:
+    m_OverrideState: 1
+    m_Value: 1
+  compositing:
+    m_OverrideState: 1
+    m_Value:
+      renderScale: 0.4
+      blurRadius: 0.0025
+      blurStrength: 0.01
+      blurIterations: 1
+      alphaStep: 0
+      alphaSoftness: 0.35
+      cloudBrightness: 0.3
+      skyBrightness: 0.2
+  clouds:
+    m_OverrideState: 1
+    m_Value:
+      quality: 2
+      steps: 30
+      stepSize: 80
+      cloudLayerLow: 1
+      cloudLayerHigh: 4
+      cloudShadows: 0
+      cloudDataLow: {fileID: 0}
+      cloudDataHigh: {fileID: 0}
+  sky:
+    m_OverrideState: 1
+    m_Value:
+      sunSize: 0.1
+      sunIntensity: 1000
+      starIntensity: 5
+      lightWavelengths: {x: 680, y: 550, z: 440}
+      densityPower: 8
+      DayScattering: 1
+      EveningScattering: 8
+      dayColor:
+        r: 1
+        g: 1
+        b: 1
+        a: 1
+      eveningColor:
+        r: 1
+        g: 0.509
+        b: 0.509
+        a: 1
+      saturation: 1.5
+      eveningThreshold: 3
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
+  m_Name: Global Volume Profile 1
+  m_EditorClassIdentifier: 
+  components: []
