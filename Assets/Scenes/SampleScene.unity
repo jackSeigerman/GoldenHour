@@ -468,8 +468,8 @@ Transform:
   m_GameObject: {fileID: 58013210}
   serializedVersion: 2
   m_LocalRotation: {x: -0.00455421, y: 0.9997258, z: -0.021907281, w: 0.006905964}
-  m_LocalPosition: {x: -0.0374, y: 0.0768, z: -0.0526}
-  m_LocalScale: {x: 0.013755278, y: 0.013620538, z: 0.007910058}
+  m_LocalPosition: {x: -0.0258, y: 0.0818, z: -0.0435}
+  m_LocalScale: {x: 0.14576031, y: 0.03236254, z: 0.01521323}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 158304905639996167}
@@ -493,8 +493,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.22982918, y: 1, z: 1}
+  m_Center: {x: 0.08697999, y: -0.000008739141, z: -0.00042314464}
 --- !u!114 &58013213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30723,7 +30723,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 0.9811321, g: 0.63321286, b: 0, a: 1}
-  m_Intensity: 1.63
+  m_Intensity: 1.02
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -32084,6 +32084,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1945956275493058437, guid: 0fd2df123acf1ea448f5cea8cf62d56c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007735008323908847, guid: 0fd2df123acf1ea448f5cea8cf62d56c, type: 3}
+      propertyPath: m_Radius
+      value: 0.068817034
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007735008323908847, guid: 0fd2df123acf1ea448f5cea8cf62d56c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007735008323908847, guid: 0fd2df123acf1ea448f5cea8cf62d56c, type: 3}
+      propertyPath: m_Center.x
+      value: 0.0047122985
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007735008323908847, guid: 0fd2df123acf1ea448f5cea8cf62d56c, type: 3}
+      propertyPath: m_Center.z
+      value: -0.014024392
+      objectReference: {fileID: 0}
     - target: {fileID: 6831509625472058835, guid: 0fd2df123acf1ea448f5cea8cf62d56c, type: 3}
       propertyPath: m_Name
       value: Capsule
@@ -32126,6 +32146,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7126927736703095626, guid: 0fd2df123acf1ea448f5cea8cf62d56c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816146225216251574, guid: 0fd2df123acf1ea448f5cea8cf62d56c, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
