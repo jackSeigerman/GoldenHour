@@ -441,6 +441,77 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 39031751}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &58013210
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 58013211}
+  - component: {fileID: 58013213}
+  - component: {fileID: 58013212}
+  m_Layer: 0
+  m_Name: postfx
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &58013211
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58013210}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.00455421, y: 0.9997258, z: -0.021907281, w: 0.006905964}
+  m_LocalPosition: {x: -0.0374, y: 0.0768, z: -0.0526}
+  m_LocalScale: {x: 0.013755278, y: 0.013620538, z: 0.007910058}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 158304905639996167}
+  m_LocalEulerAnglesHint: {x: 2.507, y: 179.197, z: -0.54}
+--- !u!65 &58013212
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58013210}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &58013213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58013210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 0
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: c40daf31f325a364b8eae8e6049ef1d0, type: 2}
 --- !u!1 &59364280
 GameObject:
   m_ObjectHideFlags: 0
@@ -31818,6 +31889,7 @@ Transform:
   m_LocalScale: {x: 2.274117, y: 2.2741144, z: 2.3623517}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 58013211}
   - {fileID: 4219884475599955094}
   - {fileID: 5703854197062604854}
   - {fileID: 871769465}
@@ -33312,7 +33384,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
