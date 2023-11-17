@@ -28,6 +28,7 @@ public class MainMenu : MonoBehaviour
 
         {
             Debug.Log(hitData.transform.name);
+
             if(hitData.transform.name.Equals("Exit"))
             {
                 if (EditorApplication.isPlaying)
@@ -38,6 +39,18 @@ public class MainMenu : MonoBehaviour
                 {
                     Application.Quit();
                 }
+            }
+            if (hitData.transform.name.Equals("Credits"))
+            {
+
+            }
+            if (hitData.transform.name.Equals("Settings"))
+            {
+
+            }
+            if (hitData.transform.name.Equals("Play"))
+            {
+                SceneManager.LoadScene("SampleScene");
             }
         }
         
