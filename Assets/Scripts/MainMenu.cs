@@ -42,7 +42,7 @@ public class MainMenu : MonoBehaviour
             }
             if (hitData.transform.name.Equals("Credits"))
             {
-
+                SceneManager.LoadScene("credits");
             }
             if (hitData.transform.name.Equals("Settings"))
             {
@@ -57,26 +57,12 @@ public class MainMenu : MonoBehaviour
     }
     private void useRight(InputAction.CallbackContext context)
     {
-        //if (itemComponent.GetInfluenceHand() == null || itemComponent.GetInfluenceHand().GetComponent<Hand>().GetSide() != Hand.HandType.Right) return;
-        //Debug.Log("takingingPhoto");
-        //takePhoto();
+
     }
     
-   /* void FireRay()
-    {
-        Ray ray = new Ray(transform.position, transform.forward);
-        RaycastHit hitData;
-        Physics.Raycast(ray, out hitData);
-        string tag = hitData.collider.tag;
-    }*/
+
     void Update()
     {
-        Ray ray = new Ray(transform.position, transform.forward);
-        RaycastHit hitData;
-        if (Physics.Raycast(ray, out hitData))
-        
-        {
-            Debug.Log(hitData.transform.name);
-        }
+
     }
 }
