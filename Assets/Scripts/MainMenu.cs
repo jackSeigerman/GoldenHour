@@ -14,6 +14,9 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject credits;
     [SerializeField] private GameObject exit;
 
+    [SerializeField] private GameObject LC;
+    [SerializeField] private GameObject RC;
+
     void Start()
     {
         XRRig = XRRig_Behaviour.Instance.gameObject;
@@ -27,7 +30,7 @@ public class MainMenu : MonoBehaviour
 
     private void useLeft(InputAction.CallbackContext context)
     {
-        Ray ray = new Ray(transform.position, transform.forward);
+        Ray ray = new Ray(LC.transform.position, transform.forward);
         RaycastHit hitData;
         if (Physics.Raycast(ray, out hitData))
 
@@ -87,5 +90,13 @@ public class MainMenu : MonoBehaviour
 
         }
         
+    }
+    private void switchLeft()
+    {
+
+    }
+    private void switchRight()
+    {
+
     }
 }
