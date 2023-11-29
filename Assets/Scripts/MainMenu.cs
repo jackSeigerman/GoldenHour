@@ -17,20 +17,28 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject LC;
     [SerializeField] private GameObject RC;
 
+    [SerializeField] private GameObject LR;
+    [SerializeField] private GameObject RR;
+
+    private GameObject x;
     void Start()
     {
+        LR.SetActive(true);
+        RR.SetActive(false);
+
         XRRig = XRRig_Behaviour.Instance.gameObject;
         XRControls = XRRig_Behaviour.Instance.XRControls;
 
-
         XRControls.Character.TriggerLeft.started += useLeft;
         XRControls.Character.TriggerRight.started += useRight;
-        Ray ray = new Ray(transform.position, transform.forward);
+        x = LC;
+        Ray ray = new Ray(x.transform.position, x.transform.forward);
     }
 
     private void useLeft(InputAction.CallbackContext context)
     {
-        Ray ray = new Ray(LC.transform.position, transform.forward);
+        switchLeft();
+        Ray ray = new Ray(LC.transform.position, LC.transform.forward);
         RaycastHit hitData;
         if (Physics.Raycast(ray, out hitData))
 
@@ -65,7 +73,38 @@ public class MainMenu : MonoBehaviour
     }
     private void useRight(InputAction.CallbackContext context)
     {
+        switchRight();
+        Ray ray = new Ray(RC.transform.position, RC.transform.forward);
+        RaycastHit hitData;
+        if (Physics.Raycast(ray, out hitData))
 
+        {
+            Debug.Log(hitData.transform.name);
+
+            if (hitData.transform.name.Equals("Exit"))
+            {
+                if (EditorApplication.isPlaying)
+                {
+                    EditorApplication.isPlaying = false;
+                }
+                else
+                {
+                    Application.Quit();
+                }
+            }
+            if (hitData.transform.name.Equals("Credits"))
+            {
+                SceneManager.LoadScene("credits");
+            }
+            if (hitData.transform.name.Equals("Settings"))
+            {
+
+            }
+            if (hitData.transform.name.Equals("Play"))
+            {
+                SceneManager.LoadScene("SampleScene");
+            }
+        }
     }
     
 
@@ -78,10 +117,12 @@ public class MainMenu : MonoBehaviour
 
 
 
-        Ray ray = new Ray(transform.position, transform.forward);
+        Ray ray = new Ray(x.transform.position, x.transform.forward);
         RaycastHit hitData;
         if (Physics.Raycast(ray, out hitData))
         {
+            Debug.Log(x);
+            Debug.Log(hitData.transform.name);
             if ((hitData.transform.name.Equals("Exit")) || (hitData.transform.name.Equals("Credits")) || (hitData.transform.name.Equals("Settings")) || (hitData.transform.name.Equals("Play")))
             {
                 hitData.transform.GetComponent<MeshRenderer>().material.color = Color.red;
@@ -93,10 +134,14 @@ public class MainMenu : MonoBehaviour
     }
     private void switchLeft()
     {
-
+        LR.SetActive(true);
+        RR.SetActive(false);
+        x = LC;
     }
     private void switchRight()
     {
-
+        RR.SetActive(true);
+        LR.SetActive(false);
+        x = RC;
     }
 }

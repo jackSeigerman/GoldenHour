@@ -727,7 +727,6 @@ GameObject:
   - component: {fileID: 848113895}
   - component: {fileID: 848113894}
   - component: {fileID: 848113893}
-  - component: {fileID: 848113889}
   m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
@@ -750,24 +749,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2497885514009253373}
   m_LocalEulerAnglesHint: {x: 23.135, y: -0.214, z: 0.601}
---- !u!114 &848113889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 848113887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df89a65c90292e745b1d0a333dee1005, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  start: {fileID: 212005106}
-  settings: {fileID: 2011700871}
-  credits: {fileID: 564023062}
-  exit: {fileID: 444509176}
-  LC: {fileID: 0}
-  RC: {fileID: 0}
 --- !u!65 &848113893
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1130,7 +1111,6 @@ GameObject:
   - component: {fileID: 1029290999}
   - component: {fileID: 1029290998}
   - component: {fileID: 1029290997}
-  - component: {fileID: 1029290996}
   m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
@@ -1153,24 +1133,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3551107694324637322}
   m_LocalEulerAnglesHint: {x: 23.135, y: -0.214, z: 0.601}
---- !u!114 &1029290996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1029290994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df89a65c90292e745b1d0a333dee1005, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  start: {fileID: 212005106}
-  settings: {fileID: 2011700871}
-  credits: {fileID: 564023062}
-  exit: {fileID: 444509176}
-  LC: {fileID: 0}
-  RC: {fileID: 0}
 --- !u!65 &1029290997
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1259,7 +1221,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1130625977
 Transform:
   m_ObjectHideFlags: 0
@@ -1717,12 +1679,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df89a65c90292e745b1d0a333dee1005, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  start: {fileID: 0}
-  settings: {fileID: 0}
-  credits: {fileID: 0}
-  exit: {fileID: 0}
-  LC: {fileID: 0}
-  RC: {fileID: 0}
+  start: {fileID: 212005106}
+  settings: {fileID: 2011700871}
+  credits: {fileID: 564023062}
+  exit: {fileID: 444509176}
+  LC: {fileID: 848113887}
+  RC: {fileID: 1029290994}
+  LR: {fileID: 1414342798}
+  RR: {fileID: 1130625976}
 --- !u!65 &1617070133
 BoxCollider:
   m_ObjectHideFlags: 0
