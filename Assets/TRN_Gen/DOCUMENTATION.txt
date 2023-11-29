@@ -1,0 +1,10 @@
+TRN_Gen:
+
+To use the terrain generator, first add the TRN_Generator script to your terrain. From there you can add Noise Layers from the Noise dropdown
+and customise them to your liking. Each Noise Layer has a set of filters you can customise, which allow even greater control over the shape of
+the terrain. You can also add prefabs and grass textures to be procedurally scattered on your terrain. For best results, set the heightmap resolution 
+of your terrain to 1024 and the detail resolution to 4032.
+
+
+Please consider leaving a review for the asset as it really helps :)
+For any questions, or to show what you have made with my asset, email me at wgappster@gmail.com
