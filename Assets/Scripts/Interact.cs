@@ -87,7 +87,6 @@ public class Interact : MonoBehaviour
         HandComponent.SetGrippingState(true);
 
         GameObject closestGripPoint = GetClosestCompatibleGripPointInItems(hand);
-        Debug.Log(closestGripPoint);
         if (closestGripPoint != null)
         {
             HandComponent.SetHeldGripPoint(closestGripPoint);

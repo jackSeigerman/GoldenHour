@@ -67,8 +67,6 @@ public class Plane : MonoBehaviour
         {
 
             transform.Translate(Vector3.forward * i * Time.deltaTime);
-
-            Debug.Log(i);
             yield return null;
         }
 
