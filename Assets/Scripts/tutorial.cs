@@ -24,6 +24,8 @@ public class tutorial : MonoBehaviour
 
     [SerializeField] private GameObject grip;
     [SerializeField] private GameObject grip2;
+    [SerializeField] private GameObject grip3;
+    [SerializeField] private GameObject grip4;
     [SerializeField] private GameObject trigger;
     [SerializeField] private GameObject trigger2;
     [SerializeField] private GameObject move;
@@ -35,7 +37,8 @@ public class tutorial : MonoBehaviour
     [SerializeField] private GameObject text2;
     [SerializeField] private GameObject text3;
     [SerializeField] private GameObject text4;
-    
+    [SerializeField] private GameObject text5;
+
 
     private GameObject x;
     void Start()
@@ -91,20 +94,14 @@ public class tutorial : MonoBehaviour
     {
         exit.transform.GetComponent<MeshRenderer>().material.color = Color.white;
 
-
-
         Ray ray = new Ray(x.transform.position, x.transform.forward);
         RaycastHit hitData;
         if (Physics.Raycast(ray, out hitData))
         {
-            Debug.Log(x);
-            Debug.Log(hitData.transform.name);
             if (hitData.transform.name.Equals("Exit"))
             {
                 hitData.transform.GetComponent<MeshRenderer>().material.color = Color.red;
             }
-           
-
         }
         
     }
@@ -124,33 +121,191 @@ public class tutorial : MonoBehaviour
 
     private IEnumerator wait()
     {
-        yield return new WaitForSeconds(2f);
+        text.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        text.SetActive(false);
         StartCoroutine(gripe());
     }
 
     private IEnumerator gripe()
     {
-        text.SetActive(true);
+        text2.SetActive(true);
+
         grip.GetComponent<MeshRenderer>().material = selected;
         grip2.GetComponent<MeshRenderer>().material = selected;
+        grip3.GetComponent<MeshRenderer>().material = selected;
+        grip4.GetComponent<MeshRenderer>().material = selected;
         yield return new WaitForSeconds(1f);
         grip.GetComponent<MeshRenderer>().material = clear;
         grip2.GetComponent<MeshRenderer>().material = clear;
+        grip3.GetComponent<MeshRenderer>().material = clear;
+        grip4.GetComponent<MeshRenderer>().material = clear;
         yield return new WaitForSeconds(1f);
         grip.GetComponent<MeshRenderer>().material = selected;
         grip2.GetComponent<MeshRenderer>().material = selected;
+        grip3.GetComponent<MeshRenderer>().material = selected;
+        grip4.GetComponent<MeshRenderer>().material = selected;
         yield return new WaitForSeconds(1f);
         grip.GetComponent<MeshRenderer>().material = clear;
         grip2.GetComponent<MeshRenderer>().material = clear;
+        grip3.GetComponent<MeshRenderer>().material = clear;
+        grip4.GetComponent<MeshRenderer>().material = clear;
         yield return new WaitForSeconds(1f);
         grip.GetComponent<MeshRenderer>().material = selected;
         grip2.GetComponent<MeshRenderer>().material = selected;
+        grip3.GetComponent<MeshRenderer>().material = selected;
+        grip4.GetComponent<MeshRenderer>().material = selected;
         yield return new WaitForSeconds(1f);
         grip.GetComponent<MeshRenderer>().material = clear;
         grip2.GetComponent<MeshRenderer>().material = clear;
-        text.SetActive(false);
+        grip3.GetComponent<MeshRenderer>().material = clear;
+        grip4.GetComponent<MeshRenderer>().material = clear;
+        yield return new WaitForSeconds(1f);
+        grip.GetComponent<MeshRenderer>().material = selected;
+        grip2.GetComponent<MeshRenderer>().material = selected;
+        grip3.GetComponent<MeshRenderer>().material = selected;
+        grip4.GetComponent<MeshRenderer>().material = selected;
+        yield return new WaitForSeconds(1f);
+        grip.GetComponent<MeshRenderer>().material = clear;
+        grip2.GetComponent<MeshRenderer>().material = clear;
+        grip3.GetComponent<MeshRenderer>().material = clear;
+        grip4.GetComponent<MeshRenderer>().material = clear;
+        yield return new WaitForSeconds(1f);
+        grip.GetComponent<MeshRenderer>().material = selected;
+        grip2.GetComponent<MeshRenderer>().material = selected;
+        grip3.GetComponent<MeshRenderer>().material = selected;
+        grip4.GetComponent<MeshRenderer>().material = selected;
+        yield return new WaitForSeconds(1f);
+        grip.GetComponent<MeshRenderer>().material = clear;
+        grip2.GetComponent<MeshRenderer>().material = clear;
+        grip3.GetComponent<MeshRenderer>().material = clear;
+        grip4.GetComponent<MeshRenderer>().material = clear;
+        yield return new WaitForSeconds(1f);
+
+        text2.SetActive(false);
+        yield return new WaitForSeconds(2f);
+        StartCoroutine(triggere());
     }
 
+    private IEnumerator triggere()
+    {
+        text3.SetActive(true);
 
+        trigger.GetComponent<MeshRenderer>().material = selected;
+        trigger2.GetComponent<MeshRenderer>().material = selected;
+        yield return new WaitForSeconds(1f);
+        trigger.GetComponent<MeshRenderer>().material = clear;
+        trigger2.GetComponent<MeshRenderer>().material = clear;
+        yield return new WaitForSeconds(1f);
+        trigger.GetComponent<MeshRenderer>().material = selected;
+        trigger2.GetComponent<MeshRenderer>().material = selected;
+        yield return new WaitForSeconds(1f);
+        trigger.GetComponent<MeshRenderer>().material = clear;
+        trigger2.GetComponent<MeshRenderer>().material = clear;
+        yield return new WaitForSeconds(1f);
+        trigger.GetComponent<MeshRenderer>().material = selected;
+        trigger2.GetComponent<MeshRenderer>().material = selected;
+        yield return new WaitForSeconds(1f);
+        trigger.GetComponent<MeshRenderer>().material = clear;
+        trigger2.GetComponent<MeshRenderer>().material = clear;
+        yield return new WaitForSeconds(1f);
+        trigger.GetComponent<MeshRenderer>().material = selected;
+        trigger2.GetComponent<MeshRenderer>().material = selected;
+        yield return new WaitForSeconds(1f);
+        trigger.GetComponent<MeshRenderer>().material = clear;
+        trigger2.GetComponent<MeshRenderer>().material = clear;
+        yield return new WaitForSeconds(1f);
+        trigger.GetComponent<MeshRenderer>().material = selected;
+        trigger2.GetComponent<MeshRenderer>().material = selected;
+        yield return new WaitForSeconds(1f);
+        trigger.GetComponent<MeshRenderer>().material = clear;
+        trigger2.GetComponent<MeshRenderer>().material = clear;
+        yield return new WaitForSeconds(1f);
+
+        text3.SetActive(false);
+        yield return new WaitForSeconds(2f);
+        StartCoroutine(movee());
+    }
+
+    private IEnumerator movee()
+    {
+        text4.SetActive(true);
+
+        move.GetComponent<MeshRenderer>().material = selected;
+        move2.GetComponent<MeshRenderer>().material = selected;
+        yield return new WaitForSeconds(1f);
+        move.GetComponent<MeshRenderer>().material = clear;
+        move2.GetComponent<MeshRenderer>().material = clear;
+        yield return new WaitForSeconds(1f);
+        move.GetComponent<MeshRenderer>().material = selected;
+        move2.GetComponent<MeshRenderer>().material = selected;
+        yield return new WaitForSeconds(1f);
+        move.GetComponent<MeshRenderer>().material = clear;
+        move2.GetComponent<MeshRenderer>().material = clear;
+        yield return new WaitForSeconds(1f);
+        move.GetComponent<MeshRenderer>().material = selected;
+        move2.GetComponent<MeshRenderer>().material = selected;
+        yield return new WaitForSeconds(1f);
+        move.GetComponent<MeshRenderer>().material = clear;
+        move2.GetComponent<MeshRenderer>().material = clear;
+        yield return new WaitForSeconds(1f);
+        move.GetComponent<MeshRenderer>().material = selected;
+        move2.GetComponent<MeshRenderer>().material = selected;
+        yield return new WaitForSeconds(1f);
+        move.GetComponent<MeshRenderer>().material = clear;
+        move2.GetComponent<MeshRenderer>().material = clear;
+        yield return new WaitForSeconds(1f);
+        move.GetComponent<MeshRenderer>().material = selected;
+        move2.GetComponent<MeshRenderer>().material = selected;
+        yield return new WaitForSeconds(1f);
+        move.GetComponent<MeshRenderer>().material = clear;
+        move2.GetComponent<MeshRenderer>().material = clear;
+        yield return new WaitForSeconds(1f);
+
+
+        text4.SetActive(false);
+        yield return new WaitForSeconds(2f);
+        StartCoroutine(opene());
+    }
+
+    private IEnumerator opene()
+    {
+        text5.SetActive(true);
+
+        button.GetComponent<MeshRenderer>().material = selected;
+        button2.GetComponent<MeshRenderer>().material = selected;
+        yield return new WaitForSeconds(1f);
+        button.GetComponent<MeshRenderer>().material = clear;
+        button2.GetComponent<MeshRenderer>().material = clear;
+        yield return new WaitForSeconds(1f);
+        button.GetComponent<MeshRenderer>().material = selected;
+        button2.GetComponent<MeshRenderer>().material = selected;
+        yield return new WaitForSeconds(1f);
+        button.GetComponent<MeshRenderer>().material = clear;
+        button2.GetComponent<MeshRenderer>().material = clear;
+        yield return new WaitForSeconds(1f);
+        button.GetComponent<MeshRenderer>().material = selected;
+        button2.GetComponent<MeshRenderer>().material = selected;
+        yield return new WaitForSeconds(1f);
+        button.GetComponent<MeshRenderer>().material = clear;
+        button2.GetComponent<MeshRenderer>().material = clear;
+        yield return new WaitForSeconds(1f);
+        button.GetComponent<MeshRenderer>().material = selected;
+        button2.GetComponent<MeshRenderer>().material = selected;
+        yield return new WaitForSeconds(1f);
+        button.GetComponent<MeshRenderer>().material = clear;
+        button2.GetComponent<MeshRenderer>().material = clear;
+        yield return new WaitForSeconds(1f);
+        button.GetComponent<MeshRenderer>().material = selected;
+        button2.GetComponent<MeshRenderer>().material = selected;
+        yield return new WaitForSeconds(1f);
+        button.GetComponent<MeshRenderer>().material = clear;
+        button2.GetComponent<MeshRenderer>().material = clear;
+        yield return new WaitForSeconds(1f);
+
+        text5.SetActive(false);
+        yield return new WaitForSeconds(2f);
+        StartCoroutine(wait());
+    }
 }
 
