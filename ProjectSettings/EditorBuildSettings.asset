@@ -14,6 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/credits.unity
     guid: fa2e757608480d048a1731364636dd4c
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: e891dcb859ff9654cb0b93151fdfc8e3
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 97881188910ab3b448d9de43d84c553f, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 6a8eda2abf768274eb8abbc16cb6083c, type: 2}

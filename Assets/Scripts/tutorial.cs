@@ -4,14 +4,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEditor;
 using UnityEngine.InputSystem;
-public class MainMenu : MonoBehaviour
+public class tutorial : MonoBehaviour
 {
     private GameObject XRRig;
     private XRControls XRControls;
 
-    [SerializeField] private GameObject start;
-    [SerializeField] private GameObject settings;
-    [SerializeField] private GameObject credits;
+
     [SerializeField] private GameObject exit;
 
     [SerializeField] private GameObject LC;
@@ -19,6 +17,25 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] private GameObject LR;
     [SerializeField] private GameObject RR;
+
+
+    [SerializeField] private Material clear;
+    [SerializeField] private Material selected;
+
+    [SerializeField] private GameObject grip;
+    [SerializeField] private GameObject grip2;
+    [SerializeField] private GameObject trigger;
+    [SerializeField] private GameObject trigger2;
+    [SerializeField] private GameObject move;
+    [SerializeField] private GameObject move2;
+    [SerializeField] private GameObject button;
+    [SerializeField] private GameObject button2;
+
+    [SerializeField] private GameObject text;
+    [SerializeField] private GameObject text2;
+    [SerializeField] private GameObject text3;
+    [SerializeField] private GameObject text4;
+    
 
     private GameObject x;
     void Start()
@@ -33,6 +50,9 @@ public class MainMenu : MonoBehaviour
         XRControls.Character.TriggerRight.started += useRight;
         x = LC;
         Ray ray = new Ray(x.transform.position, x.transform.forward);
+
+        StartCoroutine(wait());
+
     }
 
     private void useLeft(InputAction.CallbackContext context)
@@ -43,33 +63,13 @@ public class MainMenu : MonoBehaviour
         if (Physics.Raycast(ray, out hitData))
 
         {
-            Debug.Log(hitData.transform.name);
 
             if(hitData.transform.name.Equals("Exit"))
             {
-                if (EditorApplication.isPlaying)
-                {
-                    EditorApplication.isPlaying = false;
-                }
-                else
-                {
-                    Application.Quit();
-                }
+                SceneManager.LoadScene("mainMenu");
             }
-            if (hitData.transform.name.Equals("Credits"))
-            {
-                SceneManager.LoadScene("Credits");
-            }
-            if (hitData.transform.name.Equals("Settings"))
-            {
-                SceneManager.LoadScene("Tutorial");
-            }
-            if (hitData.transform.name.Equals("Play"))
-            {
-                SceneManager.LoadScene("SampleScene");
-            }
-        }
         
+        }
     }
     private void useRight(InputAction.CallbackContext context)
     {
@@ -79,30 +79,9 @@ public class MainMenu : MonoBehaviour
         if (Physics.Raycast(ray, out hitData))
 
         {
-            Debug.Log(hitData.transform.name);
-
-            if (hitData.transform.name.Equals("Exit"))
+            if(hitData.transform.name.Equals("Exit"))
             {
-                if (EditorApplication.isPlaying)
-                {
-                    EditorApplication.isPlaying = false;
-                }
-                else
-                {
-                    Application.Quit();
-                }
-            }
-            if (hitData.transform.name.Equals("Credits"))
-            {
-                SceneManager.LoadScene("Credits");
-            }
-            if (hitData.transform.name.Equals("Settings"))
-            {
-                SceneManager.LoadScene("Tutorial");
-            }
-            if (hitData.transform.name.Equals("Play"))
-            {
-                SceneManager.LoadScene("SampleScene");
+                SceneManager.LoadScene("mainMenu");
             }
         }
     }
@@ -110,9 +89,6 @@ public class MainMenu : MonoBehaviour
 
     void Update()
     {
-        start.transform.GetComponent<MeshRenderer>().material.color = Color.white;
-        settings.transform.GetComponent<MeshRenderer>().material.color = Color.white;
-        credits.transform.GetComponent<MeshRenderer>().material.color = Color.white;
         exit.transform.GetComponent<MeshRenderer>().material.color = Color.white;
 
 
@@ -123,7 +99,7 @@ public class MainMenu : MonoBehaviour
         {
             Debug.Log(x);
             Debug.Log(hitData.transform.name);
-            if ((hitData.transform.name.Equals("Exit")) || (hitData.transform.name.Equals("Credits")) || (hitData.transform.name.Equals("Settings")) || (hitData.transform.name.Equals("Play")))
+            if (hitData.transform.name.Equals("Exit"))
             {
                 hitData.transform.GetComponent<MeshRenderer>().material.color = Color.red;
             }
@@ -144,4 +120,37 @@ public class MainMenu : MonoBehaviour
         LR.SetActive(false);
         x = RC;
     }
+
+
+    private IEnumerator wait()
+    {
+        yield return new WaitForSeconds(2f);
+        StartCoroutine(gripe());
+    }
+
+    private IEnumerator gripe()
+    {
+        text.SetActive(true);
+        grip.GetComponent<MeshRenderer>().material = selected;
+        grip2.GetComponent<MeshRenderer>().material = selected;
+        yield return new WaitForSeconds(1f);
+        grip.GetComponent<MeshRenderer>().material = clear;
+        grip2.GetComponent<MeshRenderer>().material = clear;
+        yield return new WaitForSeconds(1f);
+        grip.GetComponent<MeshRenderer>().material = selected;
+        grip2.GetComponent<MeshRenderer>().material = selected;
+        yield return new WaitForSeconds(1f);
+        grip.GetComponent<MeshRenderer>().material = clear;
+        grip2.GetComponent<MeshRenderer>().material = clear;
+        yield return new WaitForSeconds(1f);
+        grip.GetComponent<MeshRenderer>().material = selected;
+        grip2.GetComponent<MeshRenderer>().material = selected;
+        yield return new WaitForSeconds(1f);
+        grip.GetComponent<MeshRenderer>().material = clear;
+        grip2.GetComponent<MeshRenderer>().material = clear;
+        text.SetActive(false);
+    }
+
+
 }
+
