@@ -61,7 +61,6 @@ public class polaroidPhoto : MonoBehaviour
         GameObject newCamera = Instantiate(cameraPrefab);
         newCamera.transform.SetPositionAndRotation(cameraLocation.transform.position, cameraLocation.transform.rotation);
         GameObject newPolaroid = Instantiate(polaroidPrefab, gameObject.transform);
-        newPolaroid.transform.localScale = new(466.015f, 560.836f, 2.247187f);
         newPolaroid.transform.SetPositionAndRotation(polaroidPrefabLocation.transform.position, polaroidPrefabLocation.transform.rotation);
         RenderTexture rend = new RenderTexture(256, 256, 0, RenderTextureFormat.ARGB32);
         newCamera.GetComponent<Camera>().targetTexture = rend;
@@ -98,7 +97,7 @@ public class polaroidPhoto : MonoBehaviour
         Vector3 currentPosition = l.transform.localPosition;
         for (float i = 0; i < 1; i += 0.5f * Time.deltaTime)
         {
-            l.transform.localPosition = Vector3.Lerp(currentPosition, currentPosition + new Vector3(0, 0, 14), Mathf.SmoothStep(0, 1, i));
+            l.transform.localPosition = Vector3.Lerp(currentPosition, currentPosition + new Vector3(0, 0, 0.12f), Mathf.SmoothStep(0, 1, i));
             yield return null;
         }
     }
@@ -117,7 +116,7 @@ public class polaroidPhoto : MonoBehaviour
     IEnumerator Coroutine5(GameObject l)
     {
         Item i = l.GetComponent<Item>();
-        while (!(i.GetHeld()))
+        while (!(i.Held))
         {
             yield return null;
         }

@@ -11,14 +11,21 @@ public class Grip_Point : MonoBehaviour
         Primary,
         Secondary,
         Fixed,
+        Modular,
         
     }
     [SerializeField] private Hand.HandType compatibleHand;
     [SerializeField] private GripPointType gripPointType;
+    [SerializeField] private bool canGripManually = true;
 
-    [SerializeField] private GameObject hand;
+    private GameObject hand;
     [SerializeField] private bool held = false;
     private GameObject item;
+
+    public float TriggerSqueeze { get; private set; }
+    public float GripSqueeze { get; private set; }
+    public bool PrimaryButton { get; private set; }
+    public bool SecondaryButton { get; private set; }
 
     private void Start()
     {
@@ -31,21 +38,21 @@ public class Grip_Point : MonoBehaviour
     }
     public GameObject GetHand()
     {
-        return hand;
+        return this.hand;
     }
 
     public GameObject GetItem()
     {
-        return item;
+        return this.item;
     }
     public Hand.HandType GetCompatibleHandType()
     {
-        return compatibleHand;
+        return this.compatibleHand;
     }
     
     public bool GetHeld()
     {
-        return held;
+        return this.held;
     }
     public void SetHeld(bool value)
     {
@@ -53,6 +60,20 @@ public class Grip_Point : MonoBehaviour
     }
     public new GripPointType GetType()
     {
-        return gripPointType;
+        return this.gripPointType;
     }
+    public void SetInputs(float triggerSqueeze, float gripSqueeze, bool primaryButton, bool secondaryButton)
+    {
+        this.TriggerSqueeze = triggerSqueeze;
+        this.GripSqueeze = gripSqueeze;
+        this.PrimaryButton = primaryButton;
+        this.SecondaryButton = secondaryButton;
+
+    }
+
+    public bool GetCanManuallyGrip()
+    {
+        return this.canGripManually;
+    }
+
 }

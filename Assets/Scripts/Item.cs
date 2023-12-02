@@ -1,28 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.XR;
 
 public class Item : MonoBehaviour
 {
+
     [SerializeField] private GameObject[] gripPoints;
-    [SerializeField] private bool held;
-    [SerializeField] private GameObject influenceGripPoint;
-    [SerializeField] private GameObject influenceHand = null;
+    [SerializeField] private bool overrideTransformBehaviour;
+
+    public bool Held { get; private set; }
+    private GameObject influenceGripPoint;
+    private GameObject influenceHand = null;
+
+    public GameObject currentOperator { get; private set; }
+
+    private void Start()
+    {
+        
+    }
 
     private void Update()
     {
-        if (!held | influenceGripPoint == null | influenceHand == null) return;
+        if (overrideTransformBehaviour || !Held || influenceGripPoint == null || influenceHand == null) return;
 
-
-        Vector3 gripPointOffset = new(
-            -influenceGripPoint.transform.localPosition.x * gameObject.transform.lossyScale.x,
-            -influenceGripPoint.transform.localPosition.y * gameObject.transform.lossyScale.y,
-            -influenceGripPoint.transform.localPosition.z * gameObject.transform.lossyScale.z
-            );
-
-        gameObject.transform.SetPositionAndRotation(influenceHand.transform.TransformPoint(gripPointOffset), influenceHand.transform.rotation * influenceGripPoint.transform.localRotation);
+        gameObject.transform.SetPositionAndRotation(influenceHand.transform.TransformPoint(-influenceGripPoint.transform.localPosition*10), influenceHand.transform.rotation * influenceGripPoint.transform.localRotation);
     }
 
     public GameObject[] GetGripPoints() 
@@ -34,16 +38,23 @@ public class Item : MonoBehaviour
     {
         return influenceHand;
     }
-
-    public void GrabPoint(GameObject gripPoint, GameObject hand)
+    public GameObject GetInfluenceGripPoint()
     {
+        return influenceGripPoint;
+    }
+
+    public void GrabPoint(GameObject newOperator, GameObject gripPoint, GameObject hand)
+    {
+
+        if (currentOperator != newOperator)
+            currentOperator = newOperator;
 
         // Tell the grip point that it is grabbed
         Grip_Point gripPointComponent = gripPoint.GetComponent<Grip_Point>();
         gripPointComponent.SetHand(hand);
         gripPointComponent.SetHeld(true);
 
-        held = true;
+        Held = true;
 
         // If it was a primary grip, then give control to the primary grip.
         // If it was a secondary grip, and the primary grip isn't held, then give control to the secondary grip.
@@ -58,7 +69,7 @@ public class Item : MonoBehaviour
 
             case Grip_Point.GripPointType.Secondary:
 
-                if (GetGrip(Grip_Point.GripPointType.Primary).GetHeld() == false)
+                if (GetGripPointComponent(Grip_Point.GripPointType.Primary).GetHeld() == false)
                 {
                     influenceGripPoint = gripPoint;
                     influenceHand = hand;
@@ -77,9 +88,13 @@ public class Item : MonoBehaviour
 
     public void UngrabPoint(GameObject gripPoint)
     {
+
         Grip_Point gripPointComponent = gripPoint.GetComponent<Grip_Point>();
+
         gripPointComponent.SetHand(null);
         gripPointComponent.SetHeld(false);
+
+
 
         switch (gripPointComponent.GetType())
         {
@@ -89,9 +104,9 @@ public class Item : MonoBehaviour
                 // For every specified value in the GripPointType enumerator
 
                 bool heldGripFound = false;
-                for (Grip_Point.GripPointType i = Grip_Point.GripPointType.Secondary; i <= Grip_Point.GripPointType.Fixed; i++) {
+                for (Grip_Point.GripPointType i = Grip_Point.GripPointType.Primary; i <= Grip_Point.GripPointType.Modular; i++) {
 
-                    Grip_Point vGripComponent = GetGrip(i);
+                    Grip_Point vGripComponent = GetGripPointComponent(i);
                     if (!vGripComponent) break;
 
                     if (vGripComponent.GetHeld() == true)
@@ -108,26 +123,24 @@ public class Item : MonoBehaviour
                 // We only reach this part of the case if there are no held grip points anymore
                 influenceGripPoint = null;
                 influenceHand = null;
-                held = false;
+                Held = false;
                 break;
 
-            case Grip_Point.GripPointType.Secondary:
+            default:
 
                 // If the secondary grip isn't in control, then it doesn't get to tell other grips whos in control.
                 if (gripPoint != influenceGripPoint) break;
 
-                // iterate through all possible grip points, if any of them are held, relinquish control to them.
-
                 heldGripFound = false;
-                foreach (GameObject v in gripPoints)
+                for (Grip_Point.GripPointType i = Grip_Point.GripPointType.Primary; i <= Grip_Point.GripPointType.Modular; i++)
                 {
 
-                    Grip_Point vGripComponent = v.GetComponent<Grip_Point>();
+                    Grip_Point vGripComponent = GetGripPointComponent(i);
                     if (!vGripComponent) break;
 
                     if (vGripComponent.GetHeld() == true)
                     {
-                        influenceGripPoint = v;
+                        influenceGripPoint = vGripComponent.gameObject;
                         influenceHand = vGripComponent.GetHand();
                         heldGripFound = true;
                         break;
@@ -139,23 +152,27 @@ public class Item : MonoBehaviour
                 // We only reach this part of the case if there are no held grip points anymore
                 influenceGripPoint = null;
                 influenceHand = null;
-                held = false;
+                Held = false;
                 break;
         }
     }
 
-    private Grip_Point GetGrip(Grip_Point.GripPointType type)
+    public GameObject GetGripPoint(Grip_Point.GripPointType type)
     {
         foreach (GameObject v in GetGripPoints())
         {
-            if (v.GetComponent<Grip_Point>().GetType() == type) 
-                return v.GetComponent<Grip_Point>();
-            
+            if (v.GetComponent<Grip_Point>().GetType() == type)
+                return v;
+
         }
         return null;
     }
-    public bool GetHeld()
+
+    public Grip_Point GetGripPointComponent(Grip_Point.GripPointType type)
     {
-        return held;
+        GameObject gripPoint = GetGripPoint(type);
+        if (gripPoint)
+            return gripPoint.GetComponent<Grip_Point>();
+        return null;
     }
 }

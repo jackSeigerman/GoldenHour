@@ -5,28 +5,26 @@ using UnityEngine;
 
 public class Interact : MonoBehaviour
 {
+    private readonly float reach_distance = 0.5f;
+    private readonly float grip_threshold = 0.5f;
+    private readonly float ungrip_threshold = 0.4f;
 
-    private float
-    reach_distance = 0.5f,
-    grip_threshold = 0.5f,
-    ungrip_threshold = 0.4f;
-
-    private GameObject XRRig;
+    //private GameObject XRRig;
     private XRControls XRControls;
 
-    [SerializeField]
-    private GameObject leftHand, rightHand;
+    [SerializeField] private GameObject LeftHand, RightHand, Head;
+
 
     // Data to be stored locally so that we don't have to get component every fucking frame
     private Hand leftHandBehaviour, rightHandBehaviour;
 
     void Start()
     {
-        XRRig = XRRig_Behaviour.Instance.gameObject;
+        //XRRig = XRRig_Behaviour.Instance.gameObject;
         XRControls = XRRig_Behaviour.Instance.XRControls;
 
-        leftHandBehaviour = leftHand.GetComponent<Hand>();
-        rightHandBehaviour = rightHand.GetComponent<Hand>();
+        leftHandBehaviour = LeftHand.GetComponent<Hand>();
+        rightHandBehaviour = RightHand.GetComponent<Hand>();
     }
 
     void Update()
@@ -42,11 +40,11 @@ public class Interact : MonoBehaviour
         {
             if ((leftGripValue > grip_threshold) && !leftGripping) // is it the left one?
             {
-                Grab(leftHand);
+                Grab(LeftHand);
             }
             if ((rightGripValue > grip_threshold) && !rightGripping) // is it right one?
             {
-                Grab(rightHand);
+                Grab(RightHand);
             }
         }
         
@@ -55,44 +53,28 @@ public class Interact : MonoBehaviour
         {
             if (leftGripValue < ungrip_threshold && leftGripping) // is it the left one?
             {
-                Ungrab(leftHand);
+                Ungrab(LeftHand);
             }
             if (rightGripValue < ungrip_threshold && rightGripping) // is it right one? yeayeay
             {
-                Ungrab(rightHand);
+                Ungrab(RightHand);
             }
         }
-
-        //UpdateItemTransforms();
     }
 
-    /*
-    private void UpdateItemTransforms()
-    {
-        GameObject leftHeldItem = leftHandBehaviour.GetHeldItem();
-        GameObject rightHeldItem = rightHandBehaviour.GetHeldItem();
-        if (leftHeldItem != null)
-        {
-            leftHeldItem.transform.SetPositionAndRotation(leftHand.transform.position, leftHand.transform.rotation * Quaternion.Euler(itemRotOffset));
-        }
-        if (rightHeldItem != null)
-        {
-            rightHeldItem.transform.SetPositionAndRotation(rightHand.transform.position, rightHand.transform.rotation * Quaternion.Euler(itemRotOffset));
-        }
-    }
-    */
-    private void Grab(GameObject hand)
+    public void Grab(GameObject hand)
     {
         Hand HandComponent = hand.GetComponent<Hand>();
         HandComponent.SetGrippingState(true);
 
         GameObject closestGripPoint = GetClosestCompatibleGripPointInItems(hand);
+
         if (closestGripPoint != null)
         {
             HandComponent.SetHeldGripPoint(closestGripPoint);
             GameObject closestItem = closestGripPoint.GetComponent<Grip_Point>().GetItem();
             Item closestItemComponent = closestItem.GetComponent<Item>();
-            closestItemComponent.GrabPoint(closestGripPoint, hand);
+            closestItemComponent.GrabPoint(gameObject, closestGripPoint, hand);
 
             HandComponent.SetHeldItem(closestItem);
 
@@ -100,7 +82,7 @@ public class Interact : MonoBehaviour
         }
     }
 
-    private void Ungrab(GameObject hand)
+    public void Ungrab(GameObject hand)
     {
         Hand HandComponent = hand.GetComponent<Hand>();
 
@@ -128,15 +110,15 @@ public class Interact : MonoBehaviour
         foreach (GameObject v in GameObject.FindGameObjectsWithTag("Item"))
         {
             float current_distance = (v.transform.position - hand.transform.position).magnitude;
-            if (current_distance <= reach_distance * 2)
-            {
-                
-                foreach (GameObject gripPoint in v.GetComponent<Item>().GetGripPoints())
-                {
-                    gripPoints.Add(gripPoint);
-                }
 
+            if (current_distance > reach_distance * 2)
+                continue;
+                
+            foreach (GameObject gripPoint in v.GetComponent<Item>().GetGripPoints())
+            {
+                gripPoints.Add(gripPoint);
             }
+
         }
 
         GameObject target = null;
@@ -146,15 +128,15 @@ public class Interact : MonoBehaviour
         {
             Grip_Point vComponent = v.GetComponent<Grip_Point>();
             float current_distance = (v.transform.position - hand.transform.position).magnitude;
-
+            
             // Check if grip is compatible with hand
-            bool compatible = (v != GetOppositeHand(hand).GetComponent<Hand>().GetHeldGripPoint()) && (vComponent.GetCompatibleHandType() == hand.GetComponent<Hand>().GetSide() || vComponent.GetCompatibleHandType() == Hand.HandType.Both);
+            bool compatible = (v != GetOppositeHand(hand).GetComponent<Hand>().GetHeldGripPoint()) && (vComponent.GetCompatibleHandType() == hand.GetComponent<Hand>().GetSide() || vComponent.GetCompatibleHandType() == Hand.HandType.Both) && (vComponent.GetCanManuallyGrip());
 
-            if (compatible && current_distance < target_distance)
-            {
-                target = v;
-                target_distance = current_distance;
-            }
+            if (!compatible || current_distance > target_distance)
+                continue;
+
+            target = v;
+            target_distance = current_distance;
         }
 
         return target;
@@ -162,10 +144,13 @@ public class Interact : MonoBehaviour
 
     private GameObject GetOppositeHand(GameObject hand)
     {
-        if (hand == leftHand)
-            return rightHand;
+        if (hand == LeftHand)
+            return RightHand;
         else
-            return leftHand;
+            return LeftHand;
     }
+
+    public GameObject GetHead()
+    { return Head; }
 
 }

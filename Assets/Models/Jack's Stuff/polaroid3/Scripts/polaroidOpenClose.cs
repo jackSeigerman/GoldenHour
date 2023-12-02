@@ -76,13 +76,13 @@ public class polaroidOpenClose : MonoBehaviour
 
     private void OpenLeft(InputAction.CallbackContext context)
     {
-        if (itemComponent.GetInfluenceHand() == null | itemComponent.GetInfluenceHand().GetComponent<Hand>().GetSide() != Hand.HandType.Left) return;
+        if (itemComponent.GetInfluenceHand() == null || itemComponent.GetInfluenceHand().GetComponent<Hand>().GetSide() != Hand.HandType.Left) return;
         checker();
     }
 
     private void OpenRight(InputAction.CallbackContext context)
     {
-        if (itemComponent.GetInfluenceHand() == null | itemComponent.GetInfluenceHand().GetComponent<Hand>().GetSide() != Hand.HandType.Right) return;
+        if (itemComponent.GetInfluenceHand() == null || itemComponent.GetInfluenceHand().GetComponent<Hand>().GetSide() != Hand.HandType.Right) return;
         checker();
     }
 
