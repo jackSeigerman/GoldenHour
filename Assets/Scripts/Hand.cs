@@ -26,7 +26,7 @@ public class Hand : MonoBehaviour
     private Quaternion handRotOffset = Quaternion.Euler(90, 0, 0);
 
     public float triggerSqueeze, gripSqueeze;
-    public bool primaryButton, secondaryButton;
+    public float primaryButton, secondaryButton;
 
 
     //private GameObject XRRig;
@@ -93,15 +93,15 @@ public class Hand : MonoBehaviour
             case HandType.Left:
                 triggerSqueeze = XRControls.Character.TriggerLeft.ReadValue<float>();
                 gripSqueeze = XRControls.Character.GrabLeft.ReadValue<float>();
-                primaryButton = XRControls.Character.PrimaryModeLeft.ReadValue<bool>();
-                secondaryButton = XRControls.Character.SecondaryModeLeft.ReadValue<bool>();
+                primaryButton = XRControls.Character.PrimaryModeLeft.ReadValue<float>();
+                secondaryButton = XRControls.Character.SecondaryModeLeft.ReadValue<float>();
                 break;
 
             case HandType.Right:
                 triggerSqueeze = XRControls.Character.TriggerRight.ReadValue<float>();
                 gripSqueeze = XRControls.Character.GrabRight.ReadValue<float>();
-                primaryButton = XRControls.Character.PrimaryModeRight.ReadValue<bool>();
-                secondaryButton = XRControls.Character.SecondaryModeRight.ReadValue<bool>();
+                primaryButton = XRControls.Character.PrimaryModeRight.ReadValue<float>();
+                secondaryButton = XRControls.Character.SecondaryModeRight.ReadValue<float>();
                 break;
 
         }
