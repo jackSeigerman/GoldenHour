@@ -63,17 +63,27 @@ public class polaroidPhoto : MonoBehaviour
         GameObject newPolaroid = Instantiate(polaroidPrefab, gameObject.transform);
         newPolaroid.transform.localScale = new(466.015f, 560.836f, 2.247187f);
         newPolaroid.transform.SetPositionAndRotation(polaroidPrefabLocation.transform.position, polaroidPrefabLocation.transform.rotation);
-        GameObject wallPolaroid = newPolaroid;
-        wallPolaroid.transform.SetPositionAndRotation(new Vector3(-171.003799f, 0.201952249f, -68.9326172f), Quaternion.Euler(0, 90, 0) );
         RenderTexture rend = new RenderTexture(256, 256, 0, RenderTextureFormat.ARGB32);
         newCamera.GetComponent<Camera>().targetTexture = rend;
         newPolaroid.GetNamedChild("renderTex").GetComponent<Renderer>().material.mainTexture = rend;
         StartCoroutine(Coroutine1(newCamera, newPolaroid));
-
         currentPhoto = newPolaroid;
 
-        
 
+
+        GameObject newCamera2 = Instantiate(cameraPrefab);
+        newCamera2.transform.SetPositionAndRotation(cameraLocation.transform.position, cameraLocation.transform.rotation);
+        GameObject newPolaroid2 = Instantiate(polaroidPrefab, gameObject.transform);
+        newPolaroid2.transform.localScale = new (466.015f, 560.836f, 2.247187f);
+        newPolaroid2.transform.SetPositionAndRotation(new Vector3(-171.003799f, 0.201952249f, -68.9326172f), Quaternion.Euler(0, 90, 0));
+        RenderTexture rend2 = new RenderTexture(256, 256, 0, RenderTextureFormat.ARGB32);
+        newCamera2.GetComponent<Camera>().targetTexture = rend2;
+        newPolaroid2.GetNamedChild("renderTex").GetComponent<Renderer>().material.mainTexture = rend;
+        GameObject cube = new GameObject("invisCube");
+        cube.transform.localScale = new Vector3(0.00818518456f, 0.00818518456f, 0.00818518456f);
+        newPolaroid2.transform.parent = cube.transform;
+        StartCoroutine(Coroutine1(newCamera2, newPolaroid2));
+        currentPhoto = newPolaroid2;
     }
     //main
     IEnumerator Coroutine1(GameObject t, GameObject l)
