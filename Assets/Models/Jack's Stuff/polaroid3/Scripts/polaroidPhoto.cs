@@ -63,6 +63,8 @@ public class polaroidPhoto : MonoBehaviour
         GameObject newPolaroid = Instantiate(polaroidPrefab, gameObject.transform);
         newPolaroid.transform.localScale = new(466.015f, 560.836f, 2.247187f);
         newPolaroid.transform.SetPositionAndRotation(polaroidPrefabLocation.transform.position, polaroidPrefabLocation.transform.rotation);
+        GameObject wallPolaroid = newPolaroid;
+        wallPolaroid.transform.SetPositionAndRotation(new Vector3(-171.003799f, 0.201952249f, -68.9326172f), Quaternion.Euler(0, 90, 0) );
         RenderTexture rend = new RenderTexture(256, 256, 0, RenderTextureFormat.ARGB32);
         newCamera.GetComponent<Camera>().targetTexture = rend;
         newPolaroid.GetNamedChild("renderTex").GetComponent<Renderer>().material.mainTexture = rend;
@@ -70,6 +72,7 @@ public class polaroidPhoto : MonoBehaviour
 
         currentPhoto = newPolaroid;
 
+        
 
     }
     //main
