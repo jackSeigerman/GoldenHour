@@ -24,6 +24,13 @@ public class polaroidPhoto : MonoBehaviour
     [SerializeField]
     private GameObject sound;
 
+    private int row = 13;
+    private int column = 11;
+    private int rowc = 0;
+    private int columnc = 0;
+
+    private float r = 0;
+    private float c = 0;
 
     private GameObject currentPhoto;
 
@@ -36,6 +43,8 @@ public class polaroidPhoto : MonoBehaviour
 
         XRControls.Character.TriggerLeft.started += PhotoLeft;
         XRControls.Character.TriggerRight.started += PhotoRight;
+
+
 
     }
 
@@ -75,15 +84,30 @@ public class polaroidPhoto : MonoBehaviour
         newCamera2.transform.SetPositionAndRotation(cameraLocation.transform.position, cameraLocation.transform.rotation);
         GameObject newPolaroid2 = Instantiate(polaroidPrefab, gameObject.transform);
         newPolaroid2.transform.localScale = new (466.015f, 560.836f, 2.247187f);
-        newPolaroid2.transform.SetPositionAndRotation(new Vector3(-171.003799f, 0.201952249f, -68.9326172f), Quaternion.Euler(0, 90, 0));
+        newPolaroid2.transform.SetPositionAndRotation(new Vector3(-171.003799f, 0.247952249f+c, -68.9326172f+r), Quaternion.Euler(0, 270, 0));
         RenderTexture rend2 = new RenderTexture(256, 256, 0, RenderTextureFormat.ARGB32);
         newCamera2.GetComponent<Camera>().targetTexture = rend2;
         newPolaroid2.GetNamedChild("renderTex").GetComponent<Renderer>().material.mainTexture = rend;
         GameObject cube = new GameObject("invisCube");
         cube.transform.localScale = new Vector3(0.00818518456f, 0.00818518456f, 0.00818518456f);
         newPolaroid2.transform.parent = cube.transform;
-        StartCoroutine(Coroutine1(newCamera2, newPolaroid2));
+        StartCoroutine(Coroutine6(newCamera2, newPolaroid2));
         currentPhoto = newPolaroid2;
+        if (rowc<row-1)
+        {
+            rowc++;
+            r-=0.18f;
+        }
+        else
+        {
+            r=0;
+            rowc = 0;
+            columnc++;
+            c+=0.175f;
+        }
+
+
+
     }
     //main
     IEnumerator Coroutine1(GameObject t, GameObject l)
@@ -140,6 +164,19 @@ public class polaroidPhoto : MonoBehaviour
         l.transform.parent = cube.transform;
 
     } 
+
+     IEnumerator Coroutine6(GameObject t, GameObject l)
+    {
+
+        //wait a frame
+        yield return null;
+        //set camera inactive
+        t.SetActive(false);
+        //wait for photo
+        StartCoroutine(Coroutine5(l));
+
+
+    }
 }
 
 
